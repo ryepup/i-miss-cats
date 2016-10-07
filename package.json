@@ -5,7 +5,7 @@
   "scripts": {
     "test": "mocha --opts mocha.opts",
     "test:watch": "mocha --opts mocha.opts --watch",
-    "serve": "live-server www",
+    "serve": "live-server www --entry-file=index.html",
     "watch": "watchify lib/index.ts -d -p tsify -o 'exorcist www/bundle.js.map > www/bundle.js'",
     "start": "npm-run-all --parallel watch serve test:watch"
   },
@@ -16,6 +16,7 @@
     "@types/mocha": "^2.2.32",
     "@types/react": "^0.14.39",
     "@types/react-dom": "^0.14.17",
+    "@types/react-router": "^2.0.37",
     "browserify": "^13.1.0",
     "chai": "^3.5.0",
     "exorcist": "^0.4.0",
@@ -35,6 +36,7 @@
   },
   "dependencies": {
     "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "react-dom": "^15.3.2",
+    "react-router": "^2.8.1"
   }
 }
