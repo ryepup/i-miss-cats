@@ -4,7 +4,8 @@
         "module": "commonjs",
         "noImplicitAny": true,
         "preserveConstEnums": true,
-        "strictNullChecks": true
+        "strictNullChecks": true,
+        "jsx": "react"
     },
     "files": [
         "lib"
