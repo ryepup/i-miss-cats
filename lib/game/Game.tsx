@@ -3,12 +3,17 @@ import { Stats } from './Stats';
 import { Player } from './Player';
 import { Actions } from './Actions';
 import { Reader } from './Reader';
+import {GameState} from '../engine';
 
-export function Game() {
+export interface GameProps{
+    gameState :GameState;
+}
+
+export function Game(props:GameProps) {
     return <div className="container-fluid">
         <div className="row">
             <div className="col-xs-12">
-                <Stats />
+                <Stats date={props.gameState.date} />
             </div>
         </div>
         <div className="row">
