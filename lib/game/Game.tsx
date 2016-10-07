@@ -13,7 +13,11 @@ export function Game(props:GameProps) {
     return <div className="container-fluid">
         <div className="row">
             <div className="col-xs-12">
-                <Stats date={props.gameState.date} />
+                <Stats date={props.gameState.date}
+                speed={props.gameState.speed}
+                distanceToEarth={props.gameState.distanceToEarth}
+                travelTime={props.gameState.travelTime}
+                 />
             </div>
         </div>
         <div className="row">

@@ -2,22 +2,25 @@ import * as React from 'react';
 
 export interface StatsProps {
     date: Date;
+    speed: number;
+    distanceToEarth: number,
+    travelTime: number
 }
 
 export function Stats(props: StatsProps) {
     return <div>
         <dl className="dl-horizontal">
             <dt>Distance to Earth</dt>
-            <dd>122231343 ly</dd>
+            <dd>{props.distanceToEarth} ly</dd>
 
             <dt>Speed</dt>
-            <dd>0 kph</dd>
+            <dd>{props.speed} kph</dd>
 
             <dt>Date</dt>
             <dd>{props.date.toISOString()}</dd>
 
             <dt>Travel Time</dt>
-            <dd>0 days</dd>
+            <dd>{props.travelTime} days</dd>
         </dl>
     </div>;
 }

@@ -10,6 +10,7 @@ export function tick(state: GameState, action: Action): GameState {
     var nextDate = moment(state.date).add(1, 'days');
 
     return _.assign({}, state, {
-        date: nextDate.toDate()
+        date: nextDate.toDate(),
+        travelTime: state.travelTime + 1
     });
 }
