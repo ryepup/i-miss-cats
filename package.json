@@ -1,0 +1,34 @@
+{
+  "name": "i-miss-cats",
+  "version": "0.0.0",
+  "description": "Small \"idler\" browser-based game. Game mechanic is basically a civ-style tech tree, some light RPG, and some bad sci-fi.",
+  "scripts": {
+    "test": "mocha --opts mocha.opts",
+    "test:watch": "mocha --opts mocha.opts --watch",
+    "serve": "live-server www",
+    "watch": "watchify lib/index.ts -d -p tsify -o 'exorcist www/bundle.js.map > www/bundle.js'",
+    "start": "npm-run-all --parallel watch serve test:watch"
+  },
+  "author": "Ryan Davis <ryepup@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^3.4.34",
+    "@types/mocha": "^2.2.32",
+    "browserify": "^13.1.0",
+    "chai": "^3.5.0",
+    "exorcist": "^0.4.0",
+    "live-server": "^1.1.0",
+    "mocha": "^3.1.0",
+    "npm-run-all": "^3.1.0",
+    "stringify": "^5.1.0",
+    "ts-node": "^1.4.0",
+    "tsify": "^1.0.8",
+    "typescript": "^2.0.3",
+    "watchify": "^3.7.0"
+  },
+  "browserify": {
+    "transform": [
+      "stringify"
+    ]
+  }
+}
