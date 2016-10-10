@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Game } from './Game';
-import { GameState, store, Actions } from '../engine';
+import { store } from '../engine';
+import { GameState, PlayerAction } from '../engine/GameState';
+import { makeTickAction, makeStartAction } from '../engine/Actions';
 
 export class GameContainer extends React.Component<{}, GameState> {
     timer: Number;
@@ -13,11 +15,15 @@ export class GameContainer extends React.Component<{}, GameState> {
 
     componentDidMount() {
         this.timer = setInterval(
-            () => store.dispatch({ type: Actions.TICK }),
+            () => store.dispatch(makeTickAction(1)),
             1000);
     }
 
+    onStart(action: PlayerAction) {
+        store.dispatch(makeStartAction(action))
+    }
+
     render() {
-        return <Game gameState={this.state} />;
+        return <Game gameState={this.state} onStart={this.onStart} />;
     }
 }

@@ -1,52 +1,61 @@
 import * as React from 'react';
+import { PlayerAction } from '../engine/GameState'
 
-export function Actions() {
+
+export interface ActionsProps {
+    actions: PlayerAction[]
+    available: PlayerAction[]
+    onStart: (action:PlayerAction) => any
+}
+
+
+export function Actions(props: ActionsProps) {
+
     return <div>
-        <h4>Actions</h4>
+        <h4>Active</h4>
 
-        <div>
-            <strong>Reading Book 1</strong>
+        {props.actions.map(actionItem)}
+
+        <h4>Available ({props.available.length})</h4>
+        {props.available.map(availableItem)}
+    </div>;
+
+    function actionItem(item:PlayerAction, index:number, list:PlayerAction[]) {
+        const pct = 100 * item.hours / item.totalHours;
+        const canMoveUp = index > 0;
+        const canMoveDown = index < (list.length - 1)
+
+        return <div key={item.id}>
+            <strong>{item.name}</strong>
             <div className="pull-right">
                 <div className="btn-group btn-group-sm">
                     <button type="button" className="btn btn-default"
-                    disabled={true}>
+                        disabled={canMoveUp}>
                         <span className="glyphicon glyphicon-arrow-up"></span>
                     </button>
-                    <button type="button" className="btn btn-default">
-                                            <span className="glyphicon glyphicon-arrow-down"></span>
+                    <button type="button" className="btn btn-default"
+                        disabled={canMoveDown}
+                        >
+                        <span className="glyphicon glyphicon-arrow-down"></span>
                     </button>
                 </div>
             </div>
             <div className="clearfix"></div>
             <div className="progress">
-                <div className="progress-bar" style={{ width: '60%' }}>
-                    60/100
+                <div className="progress-bar" style={{ width: `${pct}%` }}>
+                    {item.hours}/{item.totalHours}
                 </div>
             </div>
         </div>
-        <div>
-            <strong>Reading Book 2</strong>
-            <div className="pull-right">
-                <div className="btn-group btn-group-sm">
-                    <button type="button" className="btn btn-default">
-                        <span className="glyphicon glyphicon-arrow-up"></span>
-                    </button>
-                    <button type="button" className="btn btn-default">
-                                            <span className="glyphicon glyphicon-arrow-down"></span>
-                    </button>
-                </div>
-            </div>
-            <div className="clearfix"></div>
-            <div className="progress">
-                <div className="progress-bar" style={{ width: '60%' }}>
-                    20/100
-                </div>
-            </div>
-        </div>
+    }
 
-        <h4>Available soon</h4>
-        <div>
-            <em>Reading book 3</em>
+    function availableItem(item:PlayerAction) {
+        return <div key={item.id}>
+            <em>{item.name} ({item.totalHours}hours)</em>
+            <div className="pull-right">
+                <button className="btn btn-xs btn-default"
+                    onClick={() => props.onStart(item)} >Start</button>
+            </div>
         </div>
-    </div>;
+    }
 }

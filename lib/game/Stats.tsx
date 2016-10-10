@@ -20,7 +20,7 @@ export function Stats(props: StatsProps) {
             <dd>{props.date.toISOString()}</dd>
 
             <dt>Travel Time</dt>
-            <dd>{props.travelTime} days</dd>
+            <dd>{props.travelTime} hours</dd>
         </dl>
     </div>;
 }

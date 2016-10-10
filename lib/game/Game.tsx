@@ -3,10 +3,11 @@ import { Stats } from './Stats';
 import { Player } from './Player';
 import { Actions } from './Actions';
 import { Reader } from './Reader';
-import {GameState} from '../engine';
+import {GameState, PlayerAction} from '../engine/GameState';
 
 export interface GameProps{
     gameState :GameState;
+    onStart: (action:PlayerAction) => any
 }
 
 export function Game(props:GameProps) {
@@ -22,7 +23,10 @@ export function Game(props:GameProps) {
         </div>
         <div className="row">
             <div className="col-xs-4">
-                <Actions />
+                <Actions
+                    actions={props.gameState.actions}
+                    available={props.gameState.availableActions}
+                    onStart={props.onStart} />
             </div>
             <div className="col-xs-4">
                 <Reader />

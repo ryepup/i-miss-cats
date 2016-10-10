@@ -1,15 +1,17 @@
 import { createStore } from 'redux';
-import { tick } from './tick';
 import { GameState } from './GameState';
+import { reducers } from './reducers';
+import { makeFinishAction } from './Actions';
 
 export { GameState } from './GameState';
-export { Actions } from './Actions';
+export const store = createStore<GameState>(reducers);
 
-const initalState = { 
-    date: new Date(3055, 0, 14), 
-    speed: 0,
-    distanceToEarth: 1000000,
-    travelTime: 0
-};
-
-export const store = createStore<GameState>(tick, initalState);
+store.subscribe(() => {
+    const state = store.getState();
+    if(state.actions){
+        const headAction = state.actions[0]
+        if(headAction && headAction.hours > headAction.totalHours){
+            store.dispatch(makeFinishAction(headAction));
+        }
+    }
+})
