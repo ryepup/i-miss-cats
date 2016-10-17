@@ -1,28 +1,19 @@
-import * as React from 'react';
-import { Stats } from './Stats';
-import { Player } from './Player';
-import { Actions } from './Actions';
-import { Reader } from './Reader';
-import { GameState } from '../engine/GameState';
-import { PlayerAction } from '../engine/interfaces';
+import * as React from 'react'
+import { StatsContainer } from './Stats'
+import { Player } from './Player'
+import { ActionsContainer } from './Actions'
+import { Reader } from './Reader'
 
-export interface GameProps {
-    gameState: GameState;
-    onStart: (action: PlayerAction) => any
-}
-
-export function Game(props: GameProps) {
+export function Game() {
     return <div className="container-fluid">
         <div className="row">
             <div className="col-xs-12">
-                <Stats ship={props.gameState.ship} />
+                <StatsContainer />
             </div>
         </div>
         <div className="row">
             <div className="col-xs-4">
-                <Actions
-                    actions={props.gameState.actions}
-                    onStart={props.onStart} />
+                <ActionsContainer />
             </div>
             <div className="col-xs-4">
                 <Reader />

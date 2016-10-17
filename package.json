@@ -37,6 +37,7 @@
     ]
   },
   "dependencies": {
+    "@types/react-redux": "^4.4.32",
     "lodash": "^4.16.4",
     "moment": "^2.15.1",
     "react": "^15.3.2",

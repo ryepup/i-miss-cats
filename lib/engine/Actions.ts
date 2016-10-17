@@ -3,6 +3,7 @@ import { PlayerAction, Identified } from './interfaces'
 
 export enum Actions {
     TICK,
+    BEGIN,
     START_ACTION,
     FINISH_ACTION
 };
@@ -37,4 +38,14 @@ export function isFinishAction(a: Action): a is FinishAction {
 
 export function makeFinishAction(action: PlayerAction): FinishAction {
     return { type: Actions.FINISH_ACTION, id: action.id };
+}
+
+export interface BeginAction extends Action { }
+
+export function isBeginAction(a: Action): a is BeginAction {
+    return a.type === Actions.BEGIN;
+}
+
+export function makeBeginAction(): BeginAction {
+    return { type: Actions.BEGIN };
 }

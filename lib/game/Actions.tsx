@@ -1,14 +1,30 @@
 import * as React from 'react';
 import { PlayerAction, PlayerActions } from '../engine/interfaces'
-
+import { GameState } from '../engine/GameState'
+import { connect } from 'react-redux'
+import { Action, Dispatch } from 'redux'
+import { makeStartAction } from '../engine/Actions';
 
 export interface ActionsProps {
     actions: PlayerActions
-    onStart: (action: PlayerAction) => any
+    onStart: (a:PlayerAction) => void
 }
 
+const mapStateToProps = (state: GameState) => {
+  return { actions: state.actions };
+}
 
-export function Actions(props: ActionsProps) {
+const mapDispatchToProps = (dispatch:Dispatch<Action>) => {
+  return {
+    onStart: (action: PlayerAction) => {
+      dispatch(makeStartAction(action))
+    }
+  }
+}
+
+export const ActionsContainer = connect(mapStateToProps, mapDispatchToProps)(Actions);
+
+function Actions(props: ActionsProps) {
 
     return <div>
         <h4>Active</h4>

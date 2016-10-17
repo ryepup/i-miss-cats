@@ -1,9 +1,27 @@
-import * as React from 'react';
+import * as React from 'react'
 import { Link } from 'react-router'
+import { connect } from 'react-redux'
+import { Action, Dispatch } from 'redux'
+import { makeBeginAction } from './engine/Actions'
+import { GameState } from './engine/GameState'
 
-export class Intro extends React.Component<{}, {}> {
-    render() {
-        return <div>
+const mapDispatchToProps = (dispatch:Dispatch<Action>) => {
+  return {
+    onStart: () => dispatch(makeBeginAction())
+  }
+}
+
+export const IntroContainer = connect(
+    (state: GameState) => null,
+    mapDispatchToProps
+    )(Intro)
+
+interface IntroProps {
+    onStart: () => void
+}
+
+function Intro(props:IntroProps){
+    return <div>
             <p>
                 The last landing pod was ready. Eight seats for the last eight travelers. The trip had been long, a centuries-long dreamless sleep for a thousand human refugees. The nuclear reactor and main computer had guided the colony ship through hundreds of light years of dead space, searching for a compatible world. A skeleton crew had been awoken as needed and spent short, tortured lives resolving desperate catastrophes.
 </p><p>
@@ -34,8 +52,8 @@ export class Intro extends React.Component<{}, {}> {
                 I miss cats
 </p></blockquote>
             <div className="pull-right">
-                <Link to="/play" className="btn btn-default">BEGIN</Link>
+                <Link to="/play" className="btn btn-default"
+                    onClick={props.onStart}>BEGIN</Link>
             </div>
         </div>;
-    }
 }

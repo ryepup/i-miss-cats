@@ -25,7 +25,7 @@ const active = (state: PlayerAction[] = [], action: Action) => {
     return state;
 }
 
-const available = (state: PlayerAction[] = findAvailable(), action: Action) => {
+const available = (state: PlayerAction[] = [], action: Action) => {
     if (isStartAction(action)) {
         return state.filter(x => x.id !== action.id);
     }
@@ -43,7 +43,11 @@ const simpleActionReducer = combineReducers<PlayerActions>({
      active, available, completed
 });
 
-const emptyActions:PlayerActions = { active: [], completed: [], available: [] };
+const emptyActions:PlayerActions = {
+    active: [],
+    completed: [],
+    available: findAvailable()
+};
 
 export const actions = (state: PlayerActions = emptyActions, action: Action) => {
     const nextState = simpleActionReducer(state, action);

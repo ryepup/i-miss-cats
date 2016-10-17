@@ -1,11 +1,19 @@
-import * as React from 'react';
-import { Ship } from '../engine/interfaces';
+import * as React from 'react'
+import { connect } from 'react-redux'
+import { Ship } from '../engine/interfaces'
+import { GameState } from '../engine/GameState';
 
-export interface StatsProps{
+const mapStateToProps = (state: GameState) => {
+  return { ship: state.ship };
+}
+
+interface StatsProps{
     ship: Ship
 }
 
-export function Stats(props: StatsProps) {
+export const StatsContainer = connect(mapStateToProps)(Stats)
+
+function Stats(props: StatsProps) {
     return <div>
         <dl className="dl-horizontal">
             <dt>Distance to Earth</dt>
