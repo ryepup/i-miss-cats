@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Game } from './Game';
 import { store } from '../engine';
-import { GameState, PlayerAction } from '../engine/GameState';
+import { GameState } from '../engine/GameState';
+import { PlayerAction } from '../engine/interfaces';
 import { makeTickAction, makeStartAction } from '../engine/Actions';
 
 export class GameContainer extends React.Component<{}, GameState> {

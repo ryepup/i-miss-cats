@@ -8,8 +8,8 @@ export const store = createStore<GameState>(reducers);
 
 store.subscribe(() => {
     const state = store.getState();
-    if(state.actions){
-        const headAction = state.actions[0]
+    if(state.actions && state.actions.active){
+        const headAction = state.actions.active[0]
         if(headAction && headAction.hours > headAction.totalHours){
             store.dispatch(makeFinishAction(headAction));
         }

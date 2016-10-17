@@ -1,26 +1,24 @@
 import * as React from 'react';
+import { Ship } from '../engine/interfaces';
 
-export interface StatsProps {
-    date: Date;
-    speed: number;
-    distanceToEarth: number,
-    travelTime: number
+export interface StatsProps{
+    ship: Ship
 }
 
 export function Stats(props: StatsProps) {
     return <div>
         <dl className="dl-horizontal">
             <dt>Distance to Earth</dt>
-            <dd>{props.distanceToEarth} ly</dd>
+            <dd>{props.ship.distanceToEarth} ly</dd>
 
             <dt>Speed</dt>
-            <dd>{props.speed} kph</dd>
+            <dd>{props.ship.speed} kph</dd>
 
             <dt>Date</dt>
-            <dd>{props.date.toISOString()}</dd>
+            <dd>{props.ship.date.toISOString()}</dd>
 
             <dt>Travel Time</dt>
-            <dd>{props.travelTime} hours</dd>
+            <dd>{props.ship.travelTime} hours</dd>
         </dl>
     </div>;
 }

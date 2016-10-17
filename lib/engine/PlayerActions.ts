@@ -1,42 +1,43 @@
-import { PlayerAction, Identified } from './GameState'
+import { PlayerAction, Identified, actionId } from './interfaces';
 import * as _ from 'lodash';
 
 abstract class PlayerActionBase implements PlayerAction {
-    hours: 0
+    hours: number
     constructor(
-        readonly id: string | number,
+        readonly id: actionId,
         readonly name: string,
         readonly totalHours: number,
-        readonly prereqs: (string | number)[] = []
-    ) { }
-
-    hasPrereqsMet(ids: (string | number)[]): boolean {
-        return this.prereqs.every(x => _.includes(ids, x))
+        readonly prereqs: actionId[] = []
+    ) {
+        this.hours = 0;
     }
 }
 
 export class Reading extends PlayerActionBase {
-    constructor(id: string | number,
+    constructor(id: actionId,
         name: string,
         totalHours: number,
-        prereqs: (string | number)[] = []) {
+        prereqs: actionId[] = []) {
         super(id, name, totalHours, prereqs)
     }
 }
 
 export class ShipOperation extends PlayerActionBase {
-    constructor(id: string | number,
+    constructor(id: actionId,
         name: string,
         totalHours: number,
-        prereqs: (string | number)[] = []) {
+        prereqs: actionId[] = []) {
         super(id, name, totalHours, prereqs)
     }
 }
 
 const allActions: PlayerActionBase[] = [
-    new Reading(0, 'Read the manual', 30),
-    new Reading(1, 'Read the manual again', 30, [0]),
-    new ShipOperation(2, 'power up the ship', 16, [1])
+    new ShipOperation('SRCH-0', 'search the ship', 4),
+    new Reading('MAN-0', 'Read J93 Seed Ship quickstart manual', 8, ['SRCH-0']),
+    new Reading('MAN-1', 'Read J93 Seed Ship reactor manual', 60, ['SRCH-0']),
+    new Reading('MAN-2', 'Read J93 Seed Ship computer manual', 60, ['SRCH-0']),
+    new ShipOperation('QUEUE-0', 'Mount a whiteboard', 1, ['SRCH-0']),
+    new ShipOperation('POWER-0', 'power up the ship', 16, ['MAN-0', 'MAN-1'])
 ]
 
 export function findAction(action: Identified): PlayerAction {
@@ -49,5 +50,12 @@ export function findAvailable(completed: Identified[] = [], active: Identified[]
 
     return allActions
         .filter(x => !_.includes(ineligible, x.id))
-        .filter(x => x.hasPrereqsMet(completedIds))
+        .filter(x => hasPrereqsMet(x, completedIds))
+}
+
+function hasPrereqsMet(action: PlayerAction, ids: actionId[]): boolean {
+    return action
+        && action.prereqs
+        && action.prereqs.every(x => _.includes(ids, x))
+        || false;
 }

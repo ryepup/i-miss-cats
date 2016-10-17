@@ -1,10 +1,10 @@
-import { Action } from 'redux';
+import { Action, combineReducers } from 'redux';
 import * as _ from 'lodash';
-import { PlayerAction, GameState, Identified } from '../GameState';
+import { PlayerActions, PlayerAction, Identified } from '../interfaces'
 import { isTickAction, isStartAction, isFinishAction } from '../Actions';
 import { findAction, findAvailable } from '../PlayerActions';
 
-export const actions = (state: PlayerAction[] = [], action: Action) => {
+const active = (state: PlayerAction[] = [], action: Action) => {
     if (isStartAction(action)) {
         return append(state, action);
     }
@@ -25,29 +25,39 @@ export const actions = (state: PlayerAction[] = [], action: Action) => {
     return state;
 }
 
-export const availableActions = (state: PlayerAction[] = findAvailable(), action: Action) => {
+const available = (state: PlayerAction[] = findAvailable(), action: Action) => {
     if (isStartAction(action)) {
         return state.filter(x => x.id !== action.id);
     }
     return state;
 }
 
-export const completedActions = (state: PlayerAction[] = [], action: Action) => {
+const completed = (state: PlayerAction[] = [], action: Action) => {
     if (isFinishAction(action)) {
         return append(state, action);
     }
     return state;
 }
 
-export function recalculateAvailable(state: GameState, action: Action): GameState {
-    if (isFinishAction(action)) {
-        const ready = findAvailable(state.actions, state.completedActions);
-        return _.assign({}, state, { availableActions: ready });
+const simpleActionReducer = combineReducers<PlayerActions>({
+     active, available, completed
+});
 
+const emptyActions:PlayerActions = { active: [], completed: [], available: [] };
+
+export const actions = (state: PlayerActions = emptyActions, action: Action) => {
+    const nextState = simpleActionReducer(state, action);
+
+    if (isFinishAction(action)) {
+        const ready = findAvailable(nextState.completed, nextState.active);
+        return _.assign({}, nextState, { available: ready });
     }
-    return state;
+
+    return nextState;
 }
+
 
 function append(list:PlayerAction[], item:Identified): PlayerAction[]{
     return list.concat([findAction(item)]);
 }
+

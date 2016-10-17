@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { PlayerAction, Identified } from './GameState'
+import { PlayerAction, Identified } from './interfaces'
 
 export enum Actions {
     TICK,
