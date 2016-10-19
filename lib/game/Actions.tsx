@@ -8,7 +8,7 @@ import CSSTransitionGroup = require('react-addons-css-transition-group')
 
 export interface ActionsProps {
     actions: PlayerActions
-    onStart: (a:PlayerAction) => void
+    onStart: (a:PlayerAction) => Action
 }
 
 const mapStateToProps = (state: GameState) => {
@@ -17,9 +17,7 @@ const mapStateToProps = (state: GameState) => {
 
 const mapDispatchToProps = (dispatch:Dispatch<Action>) => {
   return {
-    onStart: (action: PlayerAction) => {
-      dispatch(makeStartAction(action))
-    }
+    onStart: (a: PlayerAction) => dispatch(makeStartAction(a))
   }
 }
 
