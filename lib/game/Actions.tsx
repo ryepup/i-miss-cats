@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { Action, Dispatch } from 'redux'
 import { makeStartAction } from '../engine/Actions'
 import { QuickFadeCSSGroup } from './Transitions'
+import { Grid, Row, Col, ProgressBar, Button } from 'react-bootstrap'
 
 
 export interface ActionsProps {
@@ -29,65 +30,44 @@ function Actions(props: ActionsProps) {
     return <div>
         <h4>Active</h4>
 
-        <div className="container-fluid">
+        <Grid fluid={true}>
             <QuickFadeCSSGroup>
                 {props.actions.active.map(actionItem)}
             </QuickFadeCSSGroup>
-        </div>
+        </Grid>
 
         <h4>Available ({props.actions.available.length})</h4>
 
-        <div className="container-fluid">
+        <Grid fluid={true}>
             <QuickFadeCSSGroup>
                 {props.actions.available.map(availableItem)}
             </QuickFadeCSSGroup>
-        </div>
+        </Grid>
     </div>;
 
     function actionItem(item: PlayerAction, index: number, list: PlayerAction[]) {
-        const pct = 100 * item.hours / item.totalHours;
-        const canMoveUp = index > 0;
-        const canMoveDown = index < (list.length - 1)
-
-        return <div key={item.id} className="row">
-            <div className="col-xs-3">
-                <button type="button"
-                    className="btn btn-sm btn-default btn-block"
-                    disabled={!canMoveUp}>
-                    <span className="glyphicon glyphicon-arrow-up"></span>
-                </button>
-            </div>
-            <div className="col-xs-6">
+        return <Row key={item.id}>
+            <Col xs={6}>
                 <strong>{item.name}</strong>
-            </div>
-            <div className="col-xs-3">
-                <button type="button"
-                    className="btn btn-sm btn-default btn-block"
-                    disabled={!canMoveDown}>
-                    <span className="glyphicon glyphicon-arrow-down"></span>
-                </button>
-            </div>
+            </Col>
 
-            <div className="col-xs-12" style={{ marginTop: '0.5em' }}>
-                <div className="progress">
-                    <div className="progress-bar" style={{ width: `${pct}%` }}>
-                        {item.hours}/{item.totalHours}
-                    </div>
-                </div>
-            </div>
-        </div>
+            <Col xs={6}>
+                <ProgressBar max={item.totalHours} now={item.hours}
+                    label={`${item.hours}/${item.totalHours}`} />
+            </Col>
+        </Row>
     }
 
     function availableItem(item: PlayerAction) {
-        return <div key={item.id} className="row"
-            style={{ marginBottom: '0.5em' }}>
-            <div className="col-xs-8">
+        return <Row key={item.id} style={{ marginBottom: '0.5em' }}>
+            <Col xs={8}>
                 <em>{item.name} ({item.totalHours} hours)</em>
-            </div>
-            <div className="col-xs-4">
-                <button className="btn btn-sm btn-block btn-default"
-                    onClick={() => props.onStart(item)} >Start</button>
-            </div>
-        </div>
+            </Col>
+            <Col xs={4}>
+                <Button block bsSize={'xs'} 
+                    onClick={() => props.onStart(item)} >
+                Start</Button>
+            </Col>
+        </Row>
     }
 }
