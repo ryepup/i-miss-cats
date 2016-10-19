@@ -40,10 +40,10 @@ const completed = (state: PlayerAction[] = [], action: Action) => {
 }
 
 const simpleActionReducer = combineReducers<PlayerActions>({
-     active, available, completed
+    active, available, completed
 });
 
-const emptyActions:PlayerActions = {
+const emptyActions: PlayerActions = {
     active: [],
     completed: [],
     available: findAvailable()
@@ -61,7 +61,7 @@ export const actions = (state: PlayerActions = emptyActions, action: Action) => 
 }
 
 
-function append(list:PlayerAction[], item:Identified): PlayerAction[]{
+function append(list: PlayerAction[], item: Identified): PlayerAction[] {
     return list.concat([findAction(item)]);
 }
 
