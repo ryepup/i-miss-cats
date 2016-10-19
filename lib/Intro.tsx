@@ -12,7 +12,7 @@ const mapDispatchToProps = (dispatch:Dispatch<Action>) => {
 }
 
 export const IntroContainer = connect(
-    (state: GameState) => null,
+    (state: GameState) => ({}),
     mapDispatchToProps
     )(Intro)
 
