@@ -1,0 +1,17 @@
+.quick-fade-enter {
+  opacity: 0.01;
+}
+
+.quick-fade-enter.quick-fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.quick-fade-leave {
+  opacity: 1;
+}
+
+.quick-fade-leave.quick-fade-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}

@@ -17,10 +17,12 @@
     "@types/mocha": "^2.2.32",
     "@types/moment": "^2.13.0",
     "@types/react": "^0.14.39",
+    "@types/react-addons-css-transition-group": "^0.14.17",
     "@types/react-dom": "^0.14.17",
     "@types/react-router": "^2.0.37",
     "browserify": "^13.1.0",
     "chai": "^3.5.0",
+    "cssify": "^1.0.3",
     "exorcist": "^0.4.0",
     "live-server": "^1.1.0",
     "mocha": "^3.1.0",
@@ -33,7 +35,8 @@
   },
   "browserify": {
     "transform": [
-      "stringify"
+      "stringify",
+      "cssify"
     ]
   },
   "dependencies": {
@@ -41,6 +44,7 @@
     "lodash": "^4.16.4",
     "moment": "^2.15.1",
     "react": "^15.3.2",
+    "react-addons-css-transition-group": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
