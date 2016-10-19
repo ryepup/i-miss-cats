@@ -5,7 +5,8 @@ export enum Actions {
     TICK,
     BEGIN,
     START_ACTION,
-    FINISH_ACTION
+    FINISH_ACTION,
+    NEW_GAME
 };
 
 export interface TickAction extends Action {
@@ -48,4 +49,14 @@ export function isBeginAction(a: Action): a is BeginAction {
 
 export function makeBeginAction(): BeginAction {
     return { type: Actions.BEGIN };
+}
+
+export interface NewGameAction extends Action { }
+
+export function isNewGameAction(a: Action): a is NewGameAction {
+    return a.type === Actions.NEW_GAME;
+}
+
+export function makeNewGameAction(): NewGameAction {
+    return { type: Actions.NEW_GAME };
 }

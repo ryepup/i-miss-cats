@@ -4,7 +4,6 @@ import { GameState } from '../engine/GameState'
 import { connect } from 'react-redux'
 import { Action, Dispatch } from 'redux'
 import { makeStartAction } from '../engine/Actions'
-import CSSTransitionGroup = require('react-addons-css-transition-group')
 import { QuickFadeCSSGroup } from './Transitions'
 
 
