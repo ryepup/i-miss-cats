@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { Action, Dispatch } from 'redux'
 import { makeStartAction } from '../engine/Actions'
 import CSSTransitionGroup = require('react-addons-css-transition-group')
+import { QuickFadeCSSGroup } from './Transitions'
+
 
 export interface ActionsProps {
     actions: PlayerActions
@@ -29,18 +31,17 @@ function Actions(props: ActionsProps) {
         <h4>Active</h4>
 
         <div className="container-fluid">
-            <CSSTransitionGroup
-                transitionName="quick-fade"
-                transitionEnterTimeout={500}
-                transitionLeaveTimeout={300}>
-            {props.actions.active.map(actionItem)}
-            </CSSTransitionGroup>
+            <QuickFadeCSSGroup>
+                {props.actions.active.map(actionItem)}
+            </QuickFadeCSSGroup>
         </div>
 
         <h4>Available ({props.actions.available.length})</h4>
 
         <div className="container-fluid">
-            {props.actions.available.map(availableItem)}
+            <QuickFadeCSSGroup>
+                {props.actions.available.map(availableItem)}
+            </QuickFadeCSSGroup>
         </div>
     </div>;
 
