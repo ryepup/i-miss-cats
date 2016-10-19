@@ -3,42 +3,12 @@ import { StatsContainer } from './Stats'
 import { Player } from './Player'
 import { ActionsContainer } from './Actions'
 import { Reader } from './Reader'
-import { Grid, Row, Col, Nav, NavDropdown, MenuItem, Navbar } from 'react-bootstrap'
-import { connect } from 'react-redux'
-import { Action, Dispatch } from 'redux'
-import { makeNewGameAction } from '../engine/Actions'
-import { GameState } from '../engine/GameState'
+import { Grid, Row, Col } from 'react-bootstrap'
+import { Menu } from './Menu'
 
-
-interface GameProps {
-    onNewGame: () => void
-}
-
-const mapDispatchToProps = (dispatch:Dispatch<Action>) => {
-  return {
-    onNewGame: () => dispatch(makeNewGameAction())
-  }
-}
-
-export const Game = connect(
-    (state: GameState) => ({}),
-    mapDispatchToProps
-    )(render)
-
-function render(props:GameProps) {
-
-    const menuHandler = (k:any) => {
-        if(k === 'NEW_GAME') props.onNewGame();
-    };
-
+export function Game() {
     return <div>
-        <Navbar fluid={true}>
-            <Nav pullRight onSelect={menuHandler}>
-                <NavDropdown title="Options" id="nav-options">
-                    <MenuItem eventKey="NEW_GAME">Start a new game</MenuItem>
-                </NavDropdown>
-            </Nav>
-        </Navbar>
+        <Menu />
         <Grid fluid={true}>
             <Row>
                 <Col xs={12}>

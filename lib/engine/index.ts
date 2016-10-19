@@ -3,7 +3,6 @@ import { GameState } from './GameState'
 import { reducers } from './reducers'
 import { makeFinishAction, makeTickAction } from './Actions'
 import { save, load } from './SaveGame'
-export { GameState } from './GameState'
 
 export const store = createStore<GameState | undefined>(reducers, load());
 
