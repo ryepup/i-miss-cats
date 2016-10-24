@@ -2,7 +2,7 @@ import { Action, combineReducers } from 'redux';
 import * as _ from 'lodash';
 import { PlayerActions, PlayerAction, Identified } from '../interfaces'
 import { isTickAction, isStartAction, isFinishAction } from '../Actions';
-import { findAction, findAvailable } from '../PlayerActions';
+import { findAction, findAvailable, rootAction } from '../PlayerActions';
 
 const active = (state: PlayerAction[] = [], action: Action) => {
     if (isStartAction(action)) {
@@ -39,14 +39,23 @@ const completed = (state: PlayerAction[] = [], action: Action) => {
     return state;
 }
 
+const lastComplete = (state: PlayerAction = rootAction, action: Action) => {
+    if (isFinishAction(action)) {
+        return findAction(action);
+    }
+
+    return state;
+}
+
 const simpleActionReducer = combineReducers<PlayerActions>({
-    active, available, completed
+    active, available, completed, lastComplete
 });
 
 const emptyActions: PlayerActions = {
     active: [],
     completed: [],
-    available: findAvailable()
+    available: findAvailable(),
+    lastComplete: rootAction
 };
 
 export const actions = (state: PlayerActions = emptyActions, action: Action) => {

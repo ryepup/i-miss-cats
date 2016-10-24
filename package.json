@@ -13,14 +13,20 @@
   "license": "ISC",
   "devDependencies": {
     "@types/chai": "^3.4.34",
+    "@types/history": "^2.0.39",
     "@types/lodash": "^4.14.37",
     "@types/mocha": "^2.2.32",
-    "@types/moment": "^2.13.0",
+    "@types/node": "^6.0.45",
     "@types/react": "^0.14.39",
     "@types/react-addons-css-transition-group": "^0.14.17",
     "@types/react-bootstrap": "0.0.33",
     "@types/react-dom": "^0.14.17",
+    "@types/react-redux": "^4.4.32",
     "@types/react-router": "^2.0.37",
+    "@types/redux": "^3.6.31",
+    "@types/redux-thunk": "^2.1.31",
+    "@types/showdown": "^1.4.31",
+    "@types/whatwg-fetch": "0.0.32",
     "browserify": "^13.1.0",
     "chai": "^3.5.0",
     "cssify": "^1.0.3",
@@ -41,7 +47,6 @@
     ]
   },
   "dependencies": {
-    "@types/react-redux": "^4.4.32",
     "lodash": "^4.16.4",
     "moment": "^2.15.1",
     "react": "^15.3.2",
@@ -50,6 +55,8 @@
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0",
+    "showdown": "^1.4.3"
   }
 }

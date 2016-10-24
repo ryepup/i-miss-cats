@@ -3,5 +3,6 @@ import {PlayerActions, Ship} from './interfaces';
 export interface GameState {
     ship: Ship
     actions: PlayerActions
-    hoursPerTick: number
+    hoursPerTick: number,
+    content?: string
 }

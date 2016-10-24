@@ -14,7 +14,8 @@ export interface PlayerAction extends Identified {
 export interface PlayerActions {
     active: PlayerAction[]
     available: PlayerAction[]
-    completed: PlayerAction[]
+    completed: PlayerAction[],
+    lastComplete: PlayerAction
 }
 
 export interface Ship {

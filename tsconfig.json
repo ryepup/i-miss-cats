@@ -5,9 +5,16 @@
         "noImplicitAny": true,
         "preserveConstEnums": true,
         "strictNullChecks": true,
-        "jsx": "react"
+        "jsx": "react",
+        "lib": [
+            "dom", "es5", "scripthost",
+            "es2015.promise", "es2015.iterable", "es2015.symbol"
+        ]
     },
-    "files": [
-        "lib"
+    "include": [
+        "lib/**/*"
+    ],
+    "exclude": [
+        "node_modules/**/*"
     ]
 }

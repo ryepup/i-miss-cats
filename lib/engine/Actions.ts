@@ -6,7 +6,8 @@ export enum Actions {
     BEGIN,
     START_ACTION,
     FINISH_ACTION,
-    NEW_GAME
+    NEW_GAME,
+    CONTENT_LOADED
 };
 
 export interface TickAction extends Action {
@@ -21,7 +22,7 @@ export function makeTickAction(hours: number = 1): TickAction {
     return { type: Actions.TICK, hours };
 }
 
-export interface StartAction extends Action, Identified {}
+export interface StartAction extends Action, Identified { }
 
 export function isStartAction(a: Action): a is StartAction {
     return a.type === Actions.START_ACTION;
@@ -31,7 +32,7 @@ export function makeStartAction(action: PlayerAction): StartAction {
     return { type: Actions.START_ACTION, id: action.id };
 }
 
-export interface FinishAction extends Action, Identified {}
+export interface FinishAction extends Action, Identified { }
 
 export function isFinishAction(a: Action): a is FinishAction {
     return a.type === Actions.FINISH_ACTION;
@@ -59,4 +60,19 @@ export function isNewGameAction(a: Action): a is NewGameAction {
 
 export function makeNewGameAction(): NewGameAction {
     return { type: Actions.NEW_GAME };
+}
+
+export interface ContentLoadedAction extends Action {
+    content: string
+}
+
+export function isContentLoadedAction(a: Action): a is ContentLoadedAction {
+    return a.type === Actions.CONTENT_LOADED;
+}
+
+export function makeContentLoadedAction(content: string): ContentLoadedAction {
+    return {
+        type: Actions.CONTENT_LOADED,
+        content
+    };
 }

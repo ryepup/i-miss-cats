@@ -1,5 +1,5 @@
-import { PlayerAction, Identified, actionId } from './interfaces';
-import * as _ from 'lodash';
+import { PlayerAction, Identified, actionId } from './interfaces'
+import * as _ from 'lodash'
 
 abstract class PlayerActionBase implements PlayerAction {
     hours: number
@@ -10,6 +10,7 @@ abstract class PlayerActionBase implements PlayerAction {
         readonly prereqs: actionId[] = []
     ) {
         this.hours = 0;
+
     }
 }
 
@@ -30,6 +31,8 @@ export class ShipOperation extends PlayerActionBase {
         super(id, name, totalHours, prereqs)
     }
 }
+
+export const rootAction = new Reading('ROOT', 'Stay on the ship', 0)
 
 const allActions: PlayerActionBase[] = [
     new ShipOperation('SRCH-0', 'search the ship', 4),
