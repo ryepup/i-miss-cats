@@ -35,11 +35,14 @@ export class ShipOperation extends PlayerActionBase {
 export const rootAction = new Reading('ROOT', 'Stay on the ship', 0)
 
 const allActions: PlayerActionBase[] = [
-    new ShipOperation('SRCH-0', 'search the ship', 4),
-    new Reading('MAN-0', 'Read J93 Seed Ship quickstart manual', 8, ['SRCH-0']),
-    new Reading('MAN-1', 'Read J93 Seed Ship reactor manual', 60, ['SRCH-0']),
-    new Reading('MAN-2', 'Read J93 Seed Ship computer manual', 60, ['SRCH-0']),
-    new ShipOperation('QUEUE-0', 'Mount a whiteboard', 1, ['SRCH-0']),
+    new ShipOperation('SRCH-0', 'search the launch bay', 1),
+    new ShipOperation('SRCH-1', 'search the habitat pod', 1, ['SRCH-0']),
+    new ShipOperation('SRCH-2', 'search hallway A', 1, ['SRCH-1']),
+    new ShipOperation('SRCH-3', 'search hallway B', 1, ['SRCH-1']),
+    new Reading('MAN-0', 'Read J93 Seed Ship quickstart manual', 8, ['SRCH-1']),
+    new Reading('MAN-1', 'Read J93 Seed Ship reactor manual', 60, ['SRCH-2']),
+    new Reading('MAN-2', 'Read J93 Seed Ship computer manual', 60, ['SRCH-1']),
+    new Reading('MAN-3', 'Read J93 Seed Ship engine manual', 60, ['SRCH-3']),
     new ShipOperation('POWER-0', 'power up the ship', 16, ['MAN-0', 'MAN-1'])
 ]
 
