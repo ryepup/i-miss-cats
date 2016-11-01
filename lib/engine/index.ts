@@ -41,7 +41,9 @@ const makeComplexFinishAction = (action: PlayerAction) => {
         //dispatch({type:'LOADING'})
         fetch(`/content/${action.id}.md`)
             .then(readMarkdown)
-            .then(text => dispatch(makeContentLoadedAction(text)), e => console.log(e));
+            .then(
+                text => dispatch(makeContentLoadedAction(text)),
+                e => dispatch(makeContentLoadedAction("")));
 
         function readMarkdown(resp: Response) {
             const contentType = resp.headers.get("content-type");
